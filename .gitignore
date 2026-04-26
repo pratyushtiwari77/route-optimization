@@ -1,0 +1,14 @@
+# dependencies - covers both client and server
+node_modules/
+
+# production
+build/
+dist/
+
+# secret keys (CRITICAL)
+.env
+.env.local
+
+# misc
+.DS_Store
+npm-debug.log*
