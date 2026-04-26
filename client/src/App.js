@@ -159,7 +159,7 @@ function App() {
   // Handle map click reverse geocoding
   const handleMapClick = async (lat, lng) => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/reverse-geocode?lat=${lat}&lon=${lng}`);
+      const res = await axios.get(`${API_BASE_URL}/api/reverse-geocode?lat=${lat}&lon=${lng}`);
       const addressName = res.data.address;
       if (pickingMode === 'start') {
         setStartLabel(addressName);
@@ -183,7 +183,7 @@ function App() {
     try {
       const start = `${startCoords.lat},${startCoords.lon}`;
       const end = `${endCoords.lat},${endCoords.lon}`;
-      const response = await axios.get('http://localhost:5000/api/route', { params: { start, end } });
+      const response = await axios.get(`${API_BASE_URL}/api/route`, { params: { start, end } });
       setRoadRoutes(response.data);
       setMode('road');
     } catch { setError('Error fetching road routes.'); }
@@ -195,12 +195,14 @@ function App() {
     if (!startCoords || !endCoords) return alert('Please select both locations');
     setLoading(true); setError(''); setRoadRoutes([]);
     try {
-      const response = await axios.get('http://localhost:5000/api/metro-route', {
-        params: {
-          startLat: startCoords.lat, startLon: startCoords.lon,
-          endLat:   endCoords.lat,   endLon:   endCoords.lon
-        }
-      });
+     const response = await axios.get(`${API_BASE_URL}/api/metro-route`, { 
+    params: {
+      startLat: startCoords.lat, 
+      startLon: startCoords.lon,
+      endLat:   endCoords.lat,   
+      endLon:   endCoords.lon
+    } 
+});
       setMetroRoutes(response.data.routes);
       setSelectedMetroIdx(0);
       setMode('metro');
