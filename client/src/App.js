@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, Polyline, Marker, Popup, useMap, useMapEvents 
 import axios from 'axios';
 import L from 'leaflet';
 
+const API_BASE_URL = "https://route-optimization-backend-i19f.onrender.com"; 
+
 // Fix default marker icons
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -45,7 +47,7 @@ const SearchBox = ({ label, onSelect, displayValue }) => {
     setQuery(val);
     if (val.length > 2) {
       try {
-        const res = await axios.get(`http://localhost:5000/api/search?query=${val}`);
+        const res = await axios.get(`${API_BASE_URL}/api/search?query=${val}`);
         setResults(res.data);
       } catch { setResults([]); }
     } else {
