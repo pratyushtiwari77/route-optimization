@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(cors({
-  origin: "https://route-optimization-five.vercel.app/" 
+  origin: "https://route-optimization-five.vercel.app" 
 }));
 app.use(express.json());
 
